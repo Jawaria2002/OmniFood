@@ -1,0 +1,32 @@
+name: CI/CD Pipeline for Static Website
+
+on:
+  push:
+    paths:
+      - 'vendor/index.html'  # This ensures the pipeline triggers only when changes are made to vendor/index.html
+    branches:
+      - main  # or master, depending on your branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Install dependencies (optional if you have any build step, e.g., npm install)
+      - name: Install dependencies (optional)
+        run: |
+          echo "Install any dependencies if needed"
+
+      # Step 3: Build your website (optional)
+      - name: Build static website (optional)
+        run: |
+          echo "Building static website..."
+
+      # Step 4: Confirmation step
+      - name: Confirmation Step
+        run: |
+          echo "CI/CD Pipeline triggered after change to vendor/index.html"
