@@ -1,12 +1,14 @@
-name: Deploy Static Website
+name: CI/CD Pipeline for Static Website
 
 on:
   push:
+    paths:
+      - 'index.html'  # This ensures the pipeline triggers when you modify the index.html file
     branches:
       - main  # or master, depending on your branch
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,9 +16,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Step 2: Deploy to GitHub Pages
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages # The branch where the website will be deployed
-          folder: ./ # Folder to deploy (use `./` for the entire project)
+      # Step 2: Install dependencies (optional if you have any build step, e.g., npm install)
+      - name: Install dependencies
+        run: |
+          echo "Install any dependencies if needed"
+
+      # Step 3: Build your website or just echo that it's working
+      - name: Build static website (optional)
+        run: |
+          echo "Building static website..."
+          
+      # Step 4: Confirmation step to check the pipeline is triggered
+      - name: Confirmation Step
+        run: |
+          echo "CI/CD Pipeline triggered after change to index.html"
+
