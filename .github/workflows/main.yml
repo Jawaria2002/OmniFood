@@ -1,0 +1,22 @@
+name: Deploy Static Website
+
+on:
+  push:
+    branches:
+      - main  # or master, depending on your branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages # The branch where the website will be deployed
+          folder: ./ # Folder to deploy (use `./` for the entire project)
